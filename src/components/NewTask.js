@@ -1,8 +1,13 @@
 const NewTask = () => {
+    const onClick = (e) => {
+        e.preventDefault();
+        console.log(e)
+    }
+
     return (
         <form action="" className="text-center inline">
             <input type="text" name="" id="" placeholder="What's on your mind?" />
-            <input type="submit" value="Add!" />
+            <input type="submit" value="Add!" onClick={onClick} />
         </form>
     )
 }
