@@ -27,7 +27,7 @@ function App() {
     ]
   );
   return (
-    <div className="App">
+    <div className="application-container flex flex-col justify-center">
       <Header />
       <Tasks tasks={tasks} />
     </div>
