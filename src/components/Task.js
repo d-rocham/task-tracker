@@ -7,8 +7,8 @@ const Task = ({ task }) => {
                 <p className="task-date text-sm">{task.date}</p>
             </div>
             <div className="buttons-container flex flex-col justify-evenly align-center">
-                <div className="-button w-5 h-5 bg-lime-600"></div>
-                <div className="-button w-5 h-5 bg-red-600"></div>
+                <div className="-button w-6 h-6 mt-1 bg-lime-600"></div>
+                <div className="-button w-6 h-6 my-1 bg-red-600"></div>
             </div>
         </div>
     )

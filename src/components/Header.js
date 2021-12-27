@@ -2,8 +2,8 @@ import NewTask from "./NewTask";
 
 const Header = () => {
     return (
-        <div className="flex flex-col justify-center py-2">
-            <h1 className="text-3xl text-center">Task Tracker</h1>
+        <div className="header-container flex flex-col justify-center py-2">
+            <h1 className="header-title text-3xl text-center">Task Tracker</h1>
             <NewTask />
         </div>
 

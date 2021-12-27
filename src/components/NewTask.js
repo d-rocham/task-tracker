@@ -5,7 +5,7 @@ const NewTask = () => {
     }
 
     return (
-        <form action="" className="text-center inline">
+        <form action="" className="create-new-task text-center inline">
             <input type="text" name="" id="" placeholder="What's on your mind?" />
             <input type="submit" value="Add!" onClick={onClick} />
         </form>
