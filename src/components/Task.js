@@ -9,11 +9,11 @@ const Task = ({ task }) => {
                 <p className="task-date text-sm">{task.date}</p>
             </div>
             <div className="buttons-container flex flex-col justify-evenly align-center">
-                <div className="-button w-6 h-6 mt-1 bg-lime-600">
-                    <IoCheckmarkSharp className="text-lime-50 text-2xl" />
+                <div className="-button w-6 h-6 mt-1 bg-lime-600 hover:bg-lime-700 cursor-pointer">
+                    <IoCheckmarkSharp className="text-lime-50 text-2xl hover:text-lime-100" />
                 </div>
-                <div className="-button w-6 h-6 my-1 bg-red-600">
-                    <IoClose className="text-red-50 text-2xl" />
+                <div className="-button w-6 h-6 my-1 bg-red-600 hover:bg-red-700 cursor-pointer">
+                    <IoClose className="text-red-50 text-2xl hover:text-red-100" />
                 </div>
             </div>
         </div>
