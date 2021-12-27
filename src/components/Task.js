@@ -1,3 +1,5 @@
+import { IoClose, IoCheckmarkSharp } from "react-icons/io5"
+
 const Task = ({ task }) => {
     return (
         <div className="card-container flex flex-row bg-gray-200 mb-2 pr-2">
@@ -7,8 +9,12 @@ const Task = ({ task }) => {
                 <p className="task-date text-sm">{task.date}</p>
             </div>
             <div className="buttons-container flex flex-col justify-evenly align-center">
-                <div className="-button w-6 h-6 mt-1 bg-lime-600"></div>
-                <div className="-button w-6 h-6 my-1 bg-red-600"></div>
+                <div className="-button w-6 h-6 mt-1 bg-lime-600">
+                    <IoCheckmarkSharp className="text-lime-50 text-2xl" />
+                </div>
+                <div className="-button w-6 h-6 my-1 bg-red-600">
+                    <IoClose className="text-red-50 text-2xl" />
+                </div>
             </div>
         </div>
     )
