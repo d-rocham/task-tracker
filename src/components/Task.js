@@ -1,8 +1,8 @@
 const Task = ({ task }) => {
     return (
-        <div className="card-container flex flex-row bg-gray-200 mb-2">
+        <div className="card-container flex flex-row bg-gray-200 mb-2 pr-2">
             <div className="side-decorator bg-sky-600 w-2 mr-2"></div> {/* Side colored box */}
-            <div className="info-container flex flex-col my-1">
+            <div className="info-container flex flex-col grow my-1">
                 <h3 className="task-title text-xl">{task.content}</h3>
                 <p className="task-date text-sm">{task.date}</p>
             </div>
