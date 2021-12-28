@@ -26,10 +26,17 @@ function App() {
       }
     ]
   );
+
+  const deleteTask = (id) => { /* TODO: Understand filter method. */
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+
   return (
     <div className="application-container flex flex-col justify-center my-5 mx-auto px-2 max-w-screen-md border-2 border-black">
       <Header />
-      <Tasks tasks={tasks} />
+      {tasks.length > 0 ? (
+        <Tasks tasks={tasks} onDelete={deleteTask} />
+      ) : (<p className="empty-list-message italic text-slate-300 text-center">No tasks to show</p>)}
     </div>
   );
 }
