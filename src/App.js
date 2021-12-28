@@ -29,19 +29,31 @@ function App() {
         content: "Learn useState",
         date: "Dec 30th at 10:00am",
         completed: true,
+      },
+      {
+        id: 4,
+        content: "Watch Liverpool vs. Leicester",
+        date: "Dec 28th at 3:00pm",
+        completed: true,
       }
     ]
   );
 
   const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
-  }
+  };
+
+  const changeStatus = (id) => {
+    setTasks(tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
+    ))
+  };
 
   return (
     <div className="application-container flex flex-col justify-center my-5 mx-auto px-2 max-w-screen-md border-2 border-black">
       <Header />
-      <Tasks title={"Pending tasks"} tasks={tasks} completed={false} onDelete={deleteTask} />
-      <Tasks title={"Completed tasks"} tasks={tasks} completed={true} onDelete={deleteTask} />
+      <Tasks title={"Pending tasks"} tasks={tasks} completed={false} onDelete={deleteTask} onChangeStatus={changeStatus} />
+      <Tasks title={"Completed tasks"} tasks={tasks} completed={true} onDelete={deleteTask} onChangeStatus={changeStatus} />
     </div>
   );
 }
