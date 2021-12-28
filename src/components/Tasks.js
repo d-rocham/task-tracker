@@ -1,9 +1,10 @@
 import Task from "./Task";
 
-const Tasks = ({ tasks, onDelete }) => {
+const Tasks = ({ title, tasks, completed, onDelete }) => {
     return (
         <div className="tasks-container flex flex-col justify-center w-full">
-            {tasks.map((task) => (<Task key={task.id} task={task} onDelete={onDelete} />))}
+            <h3 className="text-2xl text-center mb-2">{title}</h3>
+            {tasks.map((task) => (task.completed === completed ? <Task key={task.id} task={task} onDelete={onDelete} /> : ""))}
         </div>
     )
 }

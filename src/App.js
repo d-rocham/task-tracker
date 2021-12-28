@@ -10,33 +10,38 @@ function App() {
         id: 0,
         content: "English Class",
         date: "Dec 24th at 7:30pm",
-        checked: false,
+        completed: false,
       },
       {
         id: 1,
         content: "Buy Christmas gifts",
         date: "Dec 23rd at 6:00pm",
-        checked: false,
+        completed: false,
       },
       {
         id: 2,
         content: "Ride bike",
         date: "Dec 27th at 9:00am",
-        checked: false,
+        completed: false,
+      },
+      {
+        id: 3,
+        content: "Learn useState",
+        date: "Dec 30th at 10:00am",
+        completed: true,
       }
     ]
   );
 
-  const deleteTask = (id) => { /* TODO: Understand filter method. */
+  const deleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
   }
 
   return (
     <div className="application-container flex flex-col justify-center my-5 mx-auto px-2 max-w-screen-md border-2 border-black">
       <Header />
-      {tasks.length > 0 ? (
-        <Tasks tasks={tasks} onDelete={deleteTask} />
-      ) : (<p className="empty-list-message italic text-slate-300 text-center">No tasks to show</p>)}
+      <Tasks title={"Pending tasks"} tasks={tasks} completed={false} onDelete={deleteTask} />
+      <Tasks title={"Completed tasks"} tasks={tasks} completed={true} onDelete={deleteTask} />
     </div>
   );
 }
