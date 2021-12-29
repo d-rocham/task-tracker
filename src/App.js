@@ -49,9 +49,16 @@ function App() {
     ))
   };
 
+  const addTask = (task) => {
+    const id = tasks.length;
+    const newTask = { id, ...task };
+
+    setTasks([...tasks, newTask]);
+  }
+
   return (
     <div className="application-container flex flex-col justify-center my-5 mx-auto px-2 max-w-screen-md border-2 border-black">
-      <Header />
+      <Header onSubmit={addTask} />
       <Tasks title={"Pending tasks"} tasks={tasks} completed={false} onDelete={deleteTask} onChangeStatus={changeStatus} />
       <Tasks title={"Completed tasks"} tasks={tasks} completed={true} onDelete={deleteTask} onChangeStatus={changeStatus} />
     </div>
