@@ -1,4 +1,6 @@
 import { IoClose, IoCheckmarkSharp, IoArrowUp } from "react-icons/io5"
+import TaskName from "./TaskName";
+import TaskDate from "./TaskDate";
 
 const Task = ({ task, onDelete, onChangeStatus }) => {
     return (
@@ -10,7 +12,9 @@ const Task = ({ task, onDelete, onChangeStatus }) => {
             </div>
             <div className="buttons-container flex flex-col justify-evenly align-center">
                 <div className={`button w-6 h-6 mt-1 ${task.completed ? "bg-sky-600 hover:bg-sky-700" : "bg-lime-600 hover:bg-lime-700"} cursor-pointer`} onClick={() => onChangeStatus(task.id)}>
-                    {task.completed ? <IoArrowUp className="text-2xl text-sky-50 hover:text-sky-100" /> : <IoCheckmarkSharp className="text-lime-50 text-2xl hover:text-lime-100" />}
+                    {task.completed ?
+                        <IoArrowUp className="text-2xl text-sky-50 hover:text-sky-100" />
+                        : <IoCheckmarkSharp className="text-lime-50 text-2xl hover:text-lime-100" />}
 
                 </div>
                 <div className="button w-6 h-6 my-1 bg-red-600 hover:bg-red-700 cursor-pointer" onClick={() => onDelete(task.id)}>
