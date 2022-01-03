@@ -1,7 +1,7 @@
-const TaskDate = ({ date }) => {
+const TaskDate = ({ date, handleClick }) => {
 
     return (
-        <p className="task-date text-sm font-raleway italic">{date}</p>
+        <p className="task-date text-sm font-raleway italic" onClick={handleClick} onBlur={handleClick}>{date}</p>
     )
 }
 

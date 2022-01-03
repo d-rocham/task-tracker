@@ -46,9 +46,13 @@ function App() {
     setTasks([...tasks, newTask]);
   }
 
-  const editTask = (id, content) => {
+  const editTask = (id, isContent, newData) => {
     setTasks(tasks.map((task) =>
-      task.id === id ? { ...task, content } : task));
+      task.id === id ?
+        isContent ?
+          { ...task, content: newData } :
+          { ...task, date: newData }
+        : task));
   }
 
   const deleteTask = (id) => {
