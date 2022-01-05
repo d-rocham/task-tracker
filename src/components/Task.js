@@ -3,9 +3,6 @@ import TaskInformation from "./TaskInformation";
 
 const Task = ({ task, onDelete, onChangeStatus, onEdition }) => {
 
-    /* const taskTitle = <h3 className="task-title text-xl font-ubuntu">{task.content}</h3>
-    const taskDate = <p className="task-date text-sm font-raleway italic">{task.date}</p> */
-
     return (
         <div className="card-container flex flex-row bg-gray-200 mb-2 pr-2 shadow-md">
             <div className={`side-decorator ${task.completed ? "bg-green-600" : "bg-sky-600"} w-2 mr-2`}></div>

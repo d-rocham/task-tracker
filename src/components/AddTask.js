@@ -6,15 +6,16 @@ const AddTask = ({ onSubmit }) => {
 
     const onClick = (e) => {
         e.preventDefault();
-        //TODO: input validation
 
         if (!text || !date) {
             alert("Both fields are required!")
             return;
         }
 
+        //Create task object
         onSubmit({ content: text, date: new Date(date).toDateString(), completed: false });
 
+        //Reset input fields
         setText("");
         setDate("");
     }

@@ -11,8 +11,8 @@ const TaskInformation = ({ informationType, task, onEdition }) => {
     const [isEditing, setEditing] = useState(false);
     const switchStatus = () => setEditing(!isEditing);
 
-    const handleSubmission = (id, isContent, newValue) => {
-        onEdition(id, isContent, newValue);
+    const handleSubmission = (id, newValue) => {
+        onEdition(id, newValue);
         switchStatus();
     }
 
@@ -29,7 +29,7 @@ const TaskInformation = ({ informationType, task, onEdition }) => {
             className="pending"
             placeholder={informationType === "text" ? task.content : task.date}
             onBlur={switchStatus}
-            onKeyDown={(e) => e.key === "Enter" ? handleSubmission(task.id, informationType === "text" ? true : false, e.target.value) : ""}
+            onKeyDown={(e) => e.key === "Enter" ? handleSubmission(task.id, e.target.value) : ""}
             autoFocus />)
             : informationType === "text" ?
                 <TaskTitle content={task.content} handleClick={switchStatus} /> :

@@ -6,6 +6,7 @@ import Tasks from "./components/Tasks"
 function App() {
   const [tasks, setTasks] = useState([]);
 
+  //Render incoming tasks from server
   useEffect(() => {
     const getTasks = async () => {
       const tasks = await fetchTasks();
@@ -18,33 +19,63 @@ function App() {
     }
   }, []);
 
-  const fetchTasks = async () => {
+  //Retrieve tasks or task from server. Find a better name because it won't always return several tasks
+  const fetchTasks = async (id = null) => {
     try {
-      const response = await fetch("http://localhost:5000/tasks");
-      const tasks = await response.json();
-      return tasks;
+      const response = id == null ? await fetch("http://localhost:5000/tasks") : await fetch(`http://localhost:5000/tasks/${id}`);
+      const responseData = await response.json();
+      return responseData;
     }
     catch (err) {
       alert(err);
     }
   }
 
-  const addTask = (task) => {
-    const id = tasks.length;
-    const newTask = { id, ...task };
+  //Add tasks
+  const addTask = async (task) => {
+    const response = await fetch("http://localhost:5000/tasks", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(task)
+    });
 
+    const newTask = await response.json()
     setTasks([...tasks, newTask]);
   }
 
-  const editTask = (id, isContent, newData) => {
+  //Edit task info
+  const editTask = async (id, newData) => {
+
+    //Fetch required task from server
+    const targetTask = await fetchTasks(id);
+
+    //Create new task object with updated info
+    const updatedTask = Number.isNaN(Date.parse(newData)) ?
+      { ...targetTask, content: newData } :
+      { ...targetTask, date: newData };
+
+    //Return new task to server
+    const response = await fetch(`http://localhost:5000/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(updatedTask),
+    });
+
+    const data = await response.json();
+
     setTasks(tasks.map((task) =>
       task.id === id ?
-        isContent ?
-          { ...task, content: newData } :
-          { ...task, date: newData }
+        Number.isNaN(Date.parse(newData)) ?
+          { ...task, content: data.content } :
+          { ...task, date: data.date }
         : task));
   }
 
+  //Delete task
   const deleteTask = async (id) => {
     await fetch(`http://localhost:5000/tasks/${id}`, {
       method: "DELETE",
@@ -53,12 +84,13 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+
+  //Change status (completed or not)
   const changeStatus = (id) => {
     setTasks(tasks.map((task) =>
       task.id === id ? { ...task, completed: !task.completed } : task
     ))
   };
-
 
   return (
     <div className="application-container flex flex-col justify-center my-5 mx-auto px-2 max-w-screen-md border-2 border-black">
