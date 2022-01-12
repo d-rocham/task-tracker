@@ -47,14 +47,14 @@ function App() {
 
   //Edit task info
   const editTask = async (id, newData) => {
-
     //Fetch required task from server
     const targetTask = await fetchTasks(id);
 
     //Create new task object with updated info
-    const updatedTask = Number.isNaN(Date.parse(newData)) ?
-      { ...targetTask, content: newData } :
-      { ...targetTask, date: newData };
+    const updatedTask = typeof newData === "boolean" ? { ...targetTask, completed: newData } :
+      Number.isNaN(Date.parse(newData)) ?
+        { ...targetTask, content: newData } :
+        { ...targetTask, date: newData };
 
     //Return new task to server
     const response = await fetch(`http://localhost:5000/tasks/${id}`, {
@@ -67,11 +67,14 @@ function App() {
 
     const data = await response.json();
 
+    //Update UI with incoming object
     setTasks(tasks.map((task) =>
       task.id === id ?
-        Number.isNaN(Date.parse(newData)) ?
-          { ...task, content: data.content } :
-          { ...task, date: data.date }
+        typeof newData === "boolean" ?
+          { ...task, completed: data.completed } :
+          Number.isNaN(Date.parse(newData)) ?
+            { ...task, content: data.content } :
+            { ...task, date: data.date }
         : task));
   }
 
@@ -84,19 +87,11 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
-
-  //Change status (completed or not)
-  const changeStatus = (id) => {
-    setTasks(tasks.map((task) =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ))
-  };
-
   return (
     <div className="application-container flex flex-col justify-center my-5 mx-auto px-2 max-w-screen-md border-2 border-black">
       <Header onSubmit={addTask} />
-      <Tasks title={"Pending tasks"} tasks={tasks} completed={false} onDelete={deleteTask} onChangeStatus={changeStatus} onEdition={editTask} />
-      <Tasks title={"Completed tasks"} tasks={tasks} completed={true} onDelete={deleteTask} onChangeStatus={changeStatus} />
+      <Tasks title={"Pending tasks"} tasks={tasks} completed={false} onDelete={deleteTask} onEdition={editTask} />
+      <Tasks title={"Completed tasks"} tasks={tasks} completed={true} onDelete={deleteTask} onEdition={editTask} />
     </div>
   );
 }
